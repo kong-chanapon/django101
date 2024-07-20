@@ -32,15 +32,25 @@ services:
       - ./docker-volumes/pgadmin:/var/lib/pgadmin
     networks:
       - mynetwork
+    
+  gateway:
+    build: ./nginx
+    container_name: gateway
+    ports:
+      - "80:80"
+    networks:
+      - mynetwork
+    depends_on:
+      - app
   
-  django101:
+  app:
     build: .
     # depends_on:
     #   db:
     #     condition: service_healthy
-    image: django101-service
-    ports:
-      - "8000:8000"
+    # image: django101-service-1
+    # ports:
+    #   - "8000:8000"
     environment:
       PORT: 8000
       DB_HOST: pgdb
@@ -48,6 +58,10 @@ services:
       DB_USERNAME: admin
       DB_PASSWORD: 1234
       DB_NAME: django101
+      PRODUCTION_HOST: app
+      GATEWAY_HOST: gateway
+    deploy:
+      replicas: 3
     networks:
       - mynetwork
 

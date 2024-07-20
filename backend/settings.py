@@ -29,7 +29,16 @@ SECRET_KEY = 'django-insecure-vmil$=s886=tk8_nf#7*j(u8eyp#6@q2-zwac%)*4ricds1aby
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+production_host = os.getenv("PRODUCTION_HOST")
+gateway_host =  os.getenv("GATEWAY_HOST")
+allowed_hosts = []
+
+if production_host is not None:
+    allowed_hosts.append(production_host)
+if gateway_host is not None:
+    allowed_hosts.append(gateway_host)
+    
+ALLOWED_HOSTS = allowed_hosts
 
 
 # Application definition
