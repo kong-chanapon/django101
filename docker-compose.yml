@@ -57,6 +57,9 @@ services:
       DB_NAME: django101
       PRODUCTION_HOST: app
       GATEWAY_HOST: gateway
+      DJANGO_SUPERUSER_USERNAME: admin
+      DJANGO_SUPERUSER_EMAIL: admin@gmail.com
+      DJANGO_SUPERUSER_PASSWORD: 1234
     deploy:
       replicas: 3
     networks:
