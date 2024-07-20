@@ -32,6 +32,24 @@ services:
       - ./docker-volumes/pgadmin:/var/lib/pgadmin
     networks:
       - mynetwork
+  
+  django101:
+    build: .
+    # depends_on:
+    #   db:
+    #     condition: service_healthy
+    image: django101-service
+    ports:
+      - "8000:8000"
+    environment:
+      PORT: 8000
+      DB_HOST: pgdb
+      DB_PORT: 5432
+      DB_USERNAME: admin
+      DB_PASSWORD: 1234
+      DB_NAME: django101
+    networks:
+      - mynetwork
 
 networks:
   mynetwork:
