@@ -1,4 +1,4 @@
-# django101
+# django101 (project นี้จัดทำขึ้นมาเพื่อใช้ฝึกฝนก่อนไปทำงาน)
 
 ## Structure
 ![Alt text](assets/django-rest-structure.png)
