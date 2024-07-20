@@ -64,6 +64,7 @@ services:
       replicas: 3
     networks:
       - mynetwork
+    entrypoint: ["/app/wait-for-it.sh", "pgdb:5432", "--", "sh", "-c", "python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:8000"]
 
 networks:
   mynetwork:
