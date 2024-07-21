@@ -46,7 +46,6 @@ services:
   
   app:
     build: .
-    container_name: items-service
     environment:
       PORT: 8000
       DB_HOST: aws-0-ap-southeast-1.pooler.supabase.com
