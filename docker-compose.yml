@@ -1,24 +1,24 @@
 version: "3.8"
 services:
 
-  pgdb:
-    image: postgres
-    container_name: postgres
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: 1234
-      POSTGRES_DB: django101
-    volumes:
-      - ./docker-volumes/pgdb:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U admin"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    networks:
-      - mynetwork
+  # pgdb:
+  #   image: postgres
+  #   container_name: postgres
+  #   ports:
+  #     - "5432:5432"
+  #   environment:
+  #     POSTGRES_USER: admin
+  #     POSTGRES_PASSWORD: 1234
+  #     POSTGRES_DB: django101
+  #   volumes:
+  #     - ./docker-volumes/pgdb:/var/lib/postgresql/data
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "pg_isready -U admin"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
+  #   networks:
+  #     - mynetwork
 
   pgadmin:
     image: dpage/pgadmin4
@@ -46,16 +46,17 @@ services:
   
   app:
     build: .
+    container_name: items-service
     depends_on:
       pgdb:
         condition: service_healthy
     environment:
       PORT: 8000
-      DB_HOST: pgdb
-      DB_PORT: 5432
-      DB_USERNAME: admin
-      DB_PASSWORD: 1234
-      DB_NAME: django101
+      DB_HOST: aws-0-ap-southeast-1.pooler.supabase.com
+      DB_PORT: 6543
+      DB_USERNAME: postgres.qcakvwgzyvyzxdlheqgl
+      DB_PASSWORD: AvGn5yBEjsCnLyPu
+      DB_NAME: postgres
       PRODUCTION_HOST: app
       GATEWAY_HOST: gateway
     deploy:
