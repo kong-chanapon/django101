@@ -14,5 +14,5 @@ class ItemViewSet(viewsets.ModelViewSet):
     serializer_class = ItemSerializer
     
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
-    filterset_fields = ['name', 'price']
-    search_fields = ['name', 'price']
+    filterset_fields = ['name', 'price', 'stock']
+    search_fields = ['name', 'price', 'stock']
