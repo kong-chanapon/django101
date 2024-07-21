@@ -95,12 +95,11 @@ Response จะได้ Token ออกมา จากที่จะใช้
 #### Put item
 
 ```http
-  Put http://localhost:80/api/items/
+  Put http://localhost:80/api/items/${id}/
 ```
 
 | Parameter | Type     |
 | :-------- | :------- | 
-| `id` | `number` | 
 | `name` | `string` | 
 | `price` | `number` | 
 | `stock` | `number` | 
