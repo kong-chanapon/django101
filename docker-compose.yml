@@ -47,9 +47,6 @@ services:
   app:
     build: .
     container_name: items-service
-    depends_on:
-      pgdb:
-        condition: service_healthy
     environment:
       PORT: 8000
       DB_HOST: aws-0-ap-southeast-1.pooler.supabase.com
