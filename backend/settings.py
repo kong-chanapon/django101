@@ -31,7 +31,7 @@ DEBUG = True
 
 production_host = os.getenv("PRODUCTION_HOST")
 gateway_host =  os.getenv("GATEWAY_HOST")
-allowed_hosts = []
+allowed_hosts = ['localhost', '127.0.0.1']
 
 if production_host is not None:
     allowed_hosts.append(production_host)
@@ -40,6 +40,7 @@ if gateway_host is not None:
     
 ALLOWED_HOSTS = allowed_hosts
 
+CSRF_TRUSTED_ORIGINS = ["http://" + host for host in allowed_hosts]
 
 # Application definition
 
