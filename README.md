@@ -100,7 +100,7 @@ Response จะได้ Token ออกมา จากที่จะใช้
 
 | Parameter | Type     |
 | :-------- | :------- | 
-| `id` | `string` | 
+| `id` | `number` | 
 | `name` | `string` | 
 | `price` | `number` | 
 | `stock` | `number` | 
