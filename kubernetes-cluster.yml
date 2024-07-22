@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: item-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: items-service
+  template:
+    metadata:
+      labels:
+        app: items-service
+    spec:
+      containers:
+      - name: items-service
+        image: chanapon63070028/django101-items-service:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cluster-items-service
+spec:
+  type: ClusterIP
+  selector:
+    app: items-service
+  ports:
+  - port: 80
+    targetPort: 8000
+---
+# kubectl apply -f https://raw.githubusercontent.com/nginxinc/kubernetes-ingress/v3.6.1/deploy/crds.yaml
+# kubectl apply -f nginx-ingress-controller.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: myingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: cluster-items-service
+            port:
+              number: 80
